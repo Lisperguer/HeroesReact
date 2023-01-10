@@ -5,7 +5,7 @@ import { getHeroById } from "../helpers";
 export const HeroPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const hero = useMemo(() => getHeroById(id),[id]);
+  const hero = useMemo(() => getHeroById(id), [id]);
 
   const onNavigateBack = () => {
     hero.publisher === "DC Comics" ? navigate("/dc") : navigate("/marvel");
@@ -16,8 +16,8 @@ export const HeroPage = () => {
   }
 
   return (
-    <div className="rot mt-5">
-      <div className="col-4">
+    <div className="row mt-5">
+      <div className="col-4 animate__animated animate__fadeInLeft">
         <img
           src={`/assets/heroes/${id}.jpg`}
           alt={hero.superhero}
@@ -38,13 +38,14 @@ export const HeroPage = () => {
             <b> First appearence:</b> {hero.first_appearance}
           </li>
         </ul>
+        <h5 className="mt-3"> Characters</h5>
+        <p>{hero.characters}</p>
+        <button className="btn btn-outline-primary" onClick={onNavigateBack}>
+          {" "}
+          Regresar
+        </button>
       </div>
-      <h5 className="mt-3"> Characters</h5>
-      <p>{hero.characters}</p>
-      <button className="btn btn-outline-primary" onClick={onNavigateBack}>
-        {" "}
-        Regresar
-      </button>
     </div>
   );
+  
 };
