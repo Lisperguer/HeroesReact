@@ -13,6 +13,8 @@ export const SearchPage = () => {
   const { searchText, onInputChange } = useForm({
     searchText: "",
   });
+  const showSearch = q.length === 0;
+  const showError = q.length > 0 && heroes.length === 0;
   const onSearchSubmit = (e) => {
     e.preventDefault();
     if (searchText.trim().length <= 1) return;
@@ -44,8 +46,14 @@ export const SearchPage = () => {
         <div className="col-7">
           <h4>Results</h4>
           <hr />
-          <div className="alert alert-primary">Search a hero</div>
-          <div className="alert alert-danger">
+          <div
+            className="alert alert-primary"
+            style={{ display: showSearch ? "" : "none" }}>
+            Search a hero
+          </div>
+          <div
+            className="alert alert-danger"
+            style={{ display: showError ? "" : "none" }}>
             There is no result <b> {q}</b>
           </div>
         </div>
@@ -56,7 +64,6 @@ export const SearchPage = () => {
           {...hero}
         />
       ))}
-      {/* <HeroCard /> */}
     </>
   );
 };
