@@ -8,6 +8,7 @@ export const SearchPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  //Para extraer el query del search 
   const { q = "" } = queryString.parse(location.search);
   const heroes = getHeroByName(q);
   const { searchText, onInputChange } = useForm({
@@ -18,8 +19,7 @@ export const SearchPage = () => {
   const onSearchSubmit = (e) => {
     e.preventDefault();
     if (searchText.trim().length <= 1) return;
-    console.log({ searchText });
-
+    //Manda el query parameter al navigate(lo agrega a la url)
     navigate(`?q=${searchText}`);
   };
   return (
